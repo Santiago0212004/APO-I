@@ -25,7 +25,7 @@ public class Notas{
         System.out.println("Digita tu nota: ");
         int nota = sc.nextInt();
 
-        System.out.println("");
+        System.out.println(" ");
 
         System.out.println(calificacion(nota));
     }
