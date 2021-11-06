@@ -6,6 +6,8 @@ public class Serie extends Product {
     private String reason;
     private Season serieSeasons[];
 
+    private final int MAX_SEASONS = 50;
+
     /**
      * Constructor of Serie
      * @param title, title of the product
@@ -27,7 +29,7 @@ public class Serie extends Product {
         this.protagonistNames = protagonistNames;
         this.serieState = serieState;
         this.reason = reason;
-        serieSeasons = new Season[50];
+        serieSeasons = new Season[MAX_SEASONS];
         serieSeasons[0] = new Season(programmedEpisodesQuantity, publishedEpisodesQuantity, trailer, day, month, year);
     }
 
