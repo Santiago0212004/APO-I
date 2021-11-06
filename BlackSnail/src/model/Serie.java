@@ -48,6 +48,14 @@ public class Serie extends Product {
         this.serieState = serieState;
     }
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
 
     /**
      * This method adds a season in the first null position in the array
