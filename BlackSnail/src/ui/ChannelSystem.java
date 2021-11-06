@@ -100,7 +100,7 @@ public class ChannelSystem {
 			createProduct();
 			break;
         case 6:
-            seeInformation();
+            getInformation();
             break;
         case 7:
             createSeason();
@@ -457,7 +457,7 @@ public class ChannelSystem {
      * This method allow us to see the information of a product with its title
      */
 
-    public void seeInformation(){
+    public void getInformation(){
         String title;
 
         System.out.println("Write the title of the product: ");
