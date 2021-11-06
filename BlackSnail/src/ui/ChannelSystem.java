@@ -5,6 +5,7 @@
 
 package ui;
 
+import java.util.List;
 import java.util.Scanner;
 import model.Channel;
 
@@ -61,6 +62,10 @@ public class ChannelSystem {
 				"(3) Show the number of active subscribers for each type of customer \n"+
 				"(4) Show the name of the underage subscriber who has the highest number of hours willing to consume \n"+
                 "(5) Create a Product\n"+
+                "(6) See the information of a product\n"+
+                "(7) Create season\n"+
+                "(8) Make a list of movies with a category\n"+
+                "(9) Show the series with its last season\n"+
 				"(0) Exit\n" 
 				);
 		option= sc.nextInt();
@@ -94,7 +99,18 @@ public class ChannelSystem {
         case 5:
 			createProduct();
 			break;
-
+        case 6:
+            seeInformation();
+            break;
+        case 7:
+            createSeason();
+            break;
+        case 8:
+            makeAListOfMovies();
+            break;
+        case 9:
+            showSeries();
+            break;
 		default:
 			System.out.println("\nERROR, select a valid option");
 		}
@@ -204,22 +220,27 @@ public class ChannelSystem {
         
     }
 
+    /**
+     * This method creates a product, first the user digit the data that both, serie and movie, use, and then the user enters
+     * the data corresponding to the type of product. Finally, executes the constructor.
+     */
+
     public void createProduct(){
         int typeOfProduct;
         boolean added;
 
         //Variables for both
         String title, synopsis, directorName;
-        int day, month, year;
+        int day, month, year, max_day=0;
         
 
         //Variables for Serie
-        String protagonistNames, trailer;
+        String protagonistNames, trailer, reasonOfCensored="";
         int programmedEpisodesQuantity, publishedEpisodesQuantity, state;
 
         //Variables for movie
         String productor;
-        int minimumAge, categoy;
+        int minimumAge, category;
         
 
         if(blackSnail.availableSpaceForProducts()){
@@ -232,7 +253,7 @@ public class ChannelSystem {
                 title = sc.nextLine();
             }
             
-            System.out.println("\n----------Digit the premiere date------\n");
+            System.out.println("\n----------Digit the release date------\n");
 
             System.out.println("Day: ");
             day = sc.nextInt();
@@ -242,24 +263,39 @@ public class ChannelSystem {
             month = sc.nextInt();
             sc.nextLine();
 
+            while(month<1 || month>12){
+                System.out.println("Write a valid month: ");
+                month = sc.nextInt();
+                sc.nextLine();
+            }
+
             System.out.println("Year: ");
             year = sc.nextInt();
             sc.nextLine();
 
-            while(day<0 || month<0 || year<0){
-                System.out.println("\nWrite a valid date");
+            while(year<1){
+                System.out.println("Write a valid year: ");
+                year = sc.nextInt();
+                sc.nextLine();
+            }
 
-                System.out.println("Day: ");
+            if(month==2 && ((year% 4 == 0) && ((year % 100 != 0) || (year % 400 == 0)))){
+                max_day = 29;
+            }
+            else if(month==2){
+                max_day = 28;
+            }
+            else if(month==4 || month==6 || month==9 || month==11){
+                max_day = 30;
+            }
+            else if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12){
+                max_day = 31;
+            }
+
+            while(day<1 || day>max_day){
+                System.out.println("\nYou wrote a not allowed day for that month. Write a valid one: ");
                 day = sc.nextInt();
                 sc.nextLine();
-
-                System.out.println("Month: ");
-                month = sc.nextInt();
-                sc.nextLine();
-
-                System.out.println("Year: ");
-                year = sc.nextInt();
-                sc.nextLine();  
             }
 
             System.out.println("\nWrite a synopsis: ");
@@ -312,9 +348,19 @@ public class ChannelSystem {
                 sc.nextLine();
 
                 while(state!=1 && state!=2){
-                    System.out.println("Enter a valid option");
+                    System.out.println("\nEnter a valid option");
                     state = sc.nextInt();
                     sc.nextLine();
+                }
+
+                if(state==1){
+                    System.out.println("\nWhy is it censored? Write the reason: ");
+                    reasonOfCensored = sc.nextLine();
+
+                    while(reasonOfCensored.equals("")){
+                        System.out.println("\nThe reason can't be empty, write a valid one: ");
+                        reasonOfCensored = sc.nextLine();
+                    }
                 }
 
                 System.out.println("---------------Write the data of the first season-------------");
@@ -322,21 +368,21 @@ public class ChannelSystem {
                 System.out.println("\nDigit the number of programmed episodes");
                 programmedEpisodesQuantity = sc.nextInt();
                 sc.nextLine();
+
+                while(programmedEpisodesQuantity<1){
+                    System.out.println("\nThe quantity of programmed episodes can't be less than 1. Write a valid number: ");
+                    programmedEpisodesQuantity = sc.nextInt();
+                    sc.nextLine();
+                }
                 
                 System.out.println("\nDigit the number of published episodes");
                 publishedEpisodesQuantity = sc.nextInt();
                 sc.nextLine();   
 
-                while(programmedEpisodesQuantity<0 || publishedEpisodesQuantity<0){
-                    System.out.println("\nWrite valid quantities");
-    
-                    System.out.println("\nDigit the number of programmed episodes: ");
-                    programmedEpisodesQuantity = sc.nextInt();
-                    sc.nextLine();
-                
-                    System.out.println("\nDigit the number of published episodes: ");
+                while(publishedEpisodesQuantity<1 || publishedEpisodesQuantity>programmedEpisodesQuantity){
+                    System.out.println("\nThe quantity of programmed episodes can't be less than 1 or higher than the programmed quantity. Write a valid number: ");
                     publishedEpisodesQuantity = sc.nextInt();
-                    sc.nextLine();   
+                    sc.nextLine();
                 }
                 
                 System.out.println("\nWrite the trailer URL: ");
@@ -347,7 +393,7 @@ public class ChannelSystem {
                     trailer = sc.nextLine();
                 }
 
-                added = blackSnail.addSerie(title, synopsis, directorName, day, month, year, protagonistNames, state, programmedEpisodesQuantity, publishedEpisodesQuantity, trailer);
+                added = blackSnail.addSerie(title, synopsis, directorName, day, month, year, protagonistNames, state, reasonOfCensored, programmedEpisodesQuantity, publishedEpisodesQuantity, trailer);
 
                 if(added){
                     System.out.println("\nSerie added sucessfully");
@@ -385,16 +431,16 @@ public class ChannelSystem {
                                "(5) Comedy \n"
                             );
             
-                categoy = sc.nextInt();
+                category = sc.nextInt();
                 sc.nextLine();
 
-                while(categoy<1 && categoy>5){
+                while(category<1 || category>5){
                     System.out.println("\nWrite a valid movie category: ");
-                    categoy = sc.nextInt();
+                    category = sc.nextInt();
                     sc.nextLine();
                 }
 
-                added = blackSnail.addMovie(title, synopsis, directorName, day, month, year, productor, minimumAge, categoy);
+                added = blackSnail.addMovie(title, synopsis, directorName, day, month, year, productor, minimumAge, category);
 
                 if(added){
                     System.out.println("\nMovie added sucessfully");
@@ -404,7 +450,157 @@ public class ChannelSystem {
                 }
             }
 
-        }
+        }    
     }
 
+    /**
+     * This method allow us to see the information of a product with its title
+     */
+
+    public void seeInformation(){
+        String title;
+
+        System.out.println("Write the title of the product: ");
+        title = sc.nextLine();
+
+        System.out.println(blackSnail.informationOfAProduct(title));
+    }
+
+    /**
+     * This method creates a season in a serie
+     */
+
+    public void createSeason(){
+        String title;
+        int programmedEpisodesQuantity, publishedEpisodesQuantity, day, month, year;
+        String trailer;
+        boolean added = false;
+        int max_day=0;
+    
+
+        System.out.println("\nWrite the title of the serie you want to add a season: ");
+        title = sc.nextLine();
+
+        while(title.equals("")){
+            System.out.println("Can't enter an empty title. Write a valid one: ");
+            title = sc.nextLine();
+        }
+
+        System.out.println("\nDigit the quantity of programmed episodes: ");
+        programmedEpisodesQuantity = sc.nextInt();
+        sc.nextLine();
+
+        while(programmedEpisodesQuantity<1){
+            System.out.println("\nThe quantity of programmed episodes can't be less than 1. Write a valid number: ");
+            programmedEpisodesQuantity = sc.nextInt();
+            sc.nextLine();
+        }
+
+        System.out.println("Digit the quantity of published episodes: ");
+        publishedEpisodesQuantity = sc.nextInt();
+        sc.nextLine();
+
+        while(publishedEpisodesQuantity<1 || publishedEpisodesQuantity>programmedEpisodesQuantity){
+            System.out.println("\nThe quantity of programmed episodes can't be less than 1 or higher than the programmed quantity. Write a valid number: ");
+            publishedEpisodesQuantity = sc.nextInt();
+            sc.nextLine();
+        }
+
+        System.out.println("\nWrite the trailer URL of the season: ");
+        trailer = sc.nextLine();
+
+        while(trailer.equals("")){
+            System.out.println("Can't enter an empty trailer URL. Write a valid one: ");
+            trailer = sc.nextLine();
+        }
+
+        System.out.println("\n----------Digit the release date of the season--------\n");
+
+        System.out.println("Day: ");
+        day = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Month: ");
+        month = sc.nextInt();
+        sc.nextLine();
+
+        while(month<1 || month>12){
+            System.out.println("Write a valid month: ");
+            month = sc.nextInt();
+            sc.nextLine();
+        }
+
+        System.out.println("Year: ");
+        year = sc.nextInt();
+        sc.nextLine();
+
+        while(year<1){
+            System.out.println("Write a valid year: ");
+            year = sc.nextInt();
+            sc.nextLine();
+        }
+
+        if(month==2 && ((year% 4 == 0) && ((year % 100 != 0) || (year % 400 == 0)))){
+            max_day = 29;
+        }
+        else if(month==2){
+            max_day = 28;
+        }
+        else if(month==4 || month==6 || month==9 || month==11){
+            max_day = 30;
+        }
+        else if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12){
+            max_day = 31;
+        }
+
+        while(day<1 || day>max_day){
+            System.out.println("\nYou wrote a not allowed day for that month. Write a valid one: ");
+            day = sc.nextInt();
+            sc.nextLine();
+        }
+        
+
+        added = blackSnail.addSeason(title, programmedEpisodesQuantity, publishedEpisodesQuantity, trailer, day, month, year);
+
+        if(added){
+            System.out.println("\nSeason added sucessfully");
+        }
+        else{
+            System.out.println("\nCouldn't add season");
+        }
+    }
+    
+    /**
+     * This one make a list of movie depending of the category
+     */
+    public void makeAListOfMovies(){
+        int category;
+
+        System.out.println("\nWrite the category of the movie \n"+
+                           "(1) Romantic \n"+
+                           "(2) Action \n"+
+                           "(3) Suspense \n"+
+                           "(4) Horror \n"+
+                           "(5) Comedy \n"
+                           );
+
+        category = sc.nextInt();
+        sc.nextLine();
+
+        while(category<1 || category>5){
+            System.out.println("\nWrite a valid movie category: ");
+            category = sc.nextInt();
+            sc.nextLine();
+        }
+
+        System.out.println(blackSnail.listMovies(category));
+    }
+
+    /**
+     * This shows the series and the last seasons of each one
+     */
+
+    public void showSeries(){
+        System.out.println(blackSnail.listSeries());
+    }
 }

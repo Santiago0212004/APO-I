@@ -1,32 +1,42 @@
 package model;
 
 public class Season {
-    private int programedEpisodesQuantity;
-    private int publishedEpisondesQuantity;
+    private int programmedEpisodesQuantity;
+    private int publishedEpisodesQuantity;
     private String trailer;
     private Date releaseDateOfSeason;
 
-    public Season(int programedEpisodesQuantity, int publishedEpisondesQuantity, String trailer, int day, int month, int year){       
-        this.programedEpisodesQuantity = programedEpisodesQuantity;
-        this.publishedEpisondesQuantity = publishedEpisondesQuantity;
+    /**
+     * Constructor of Season
+     * @param programmedEpisodesQuantity, programmed episodes quantity of the Season
+     * @param publishedEpisodesQuantity, published episodes quantity of the Season
+     * @param trailer, trailer URL of the season
+     * @param day, release day of the season
+     * @param month, release month of the season
+     * @param year, release year of the season
+     */
+
+    public Season(int programmedEpisodesQuantity, int publishedEpisodesQuantity, String trailer, int day, int month, int year){       
+        this.programmedEpisodesQuantity = programmedEpisodesQuantity;
+        this.publishedEpisodesQuantity = publishedEpisodesQuantity;
         this.trailer = trailer;
         releaseDateOfSeason = new Date(day, month, year);
     }
 
-    public int getProgramedEpisodesQuantity() {
-        return programedEpisodesQuantity;
+    public int getProgrammedEpisodesQuantity() {
+        return programmedEpisodesQuantity;
     }
 
-    public void setProgramedEpisodesQuantity(int programedEpisodesQuantity) {
-        this.programedEpisodesQuantity = programedEpisodesQuantity;
+    public void setProgrammedEpisodesQuantity(int programmedEpisodesQuantity) {
+        this.programmedEpisodesQuantity = programmedEpisodesQuantity;
     }
 
-    public int getPublishedEpisondesQuantity() {
-        return publishedEpisondesQuantity;
+    public int getPublishedEpisodesQuantity() {
+        return publishedEpisodesQuantity;
     }
 
-    public void setPublishedEpisondesQuantity(int publishedEpisondesQuantity) {
-        this.publishedEpisondesQuantity = publishedEpisondesQuantity;
+    public void setPublishedEpisodesQuantity(int publishedEpisondesQuantity) {
+        this.publishedEpisodesQuantity = publishedEpisodesQuantity;
     }
 
     public String getTrailer() {
@@ -43,6 +53,21 @@ public class Season {
 
     public void setReleaseDateOfSeason(Date releaseDateOfSeason) {
         this.releaseDateOfSeason = releaseDateOfSeason;
+    }
+
+    /**
+     * toString method that returns all data of season
+     * @return data, String
+     */
+
+    public String toString(){
+
+        String data = "\nQuantity of programmed episodes: "+programmedEpisodesQuantity+
+                      "\nQuantity of published episodes: "+publishedEpisodesQuantity+
+                      "\nTrailer URL: "+trailer+
+                      "\nDate: "+releaseDateOfSeason.toString();
+        
+        return data;
     }
 
 }

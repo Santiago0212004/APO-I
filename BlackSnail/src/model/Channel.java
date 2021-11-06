@@ -1,6 +1,5 @@
 package model;
 
-
 public class Channel {
 	
 	private final int MAX_PRODUCTS = 85;
@@ -29,55 +28,26 @@ public class Channel {
 		productCatalog = new Product[85];
     }
 
-    /**
-     * Returns the nit of the channel
-     * @return nit, String
-     */
 
     public String getNit() {
         return nit;
     }
 
-    /**
-     * Set a new nit for the channel
-     * @param nit nit of the channel
-     */
-
     public void setNit(String nit) {
         this.nit = nit;
     }
-
-    /**
-     * Returns the address of the channel
-     * @return address, String
-     */
 
     public String getAddress() {
         return address;
     }
 
-    /**
-     * Set a new address for the channel
-     * @param address, address of the channel
-     */
-
     public void setAddress(String address) {
         this.address = address;
     }
 
-    /**
-     * Returns the web page link of the channel
-     * @return webPage, String
-     */
-
     public String getWebPage() {
         return webPage;
     }
-
-    /**
-     * Set a new web page link for the channel
-     * @param webPage, link of the channel
-     */
 
     public void setWebPage(String webPage) {
         this.webPage = webPage;
@@ -321,7 +291,7 @@ public class Channel {
 
     /**
      * This method returns true if there is a position that is null, because this means that we have
-     * disponible space to register more subscribers
+     * disponible space to register more products
      * @return available, boolean
      */
 
@@ -336,6 +306,12 @@ public class Channel {
 
         return available;
     }
+
+    /**
+     * This method checks if we have a product with the same title as the one we are creating.
+     * @param title, it is the title of the product we are creating
+     * @return repeated, boolean
+     */
 
 
     public boolean repeatedTitle(String title){
@@ -352,7 +328,25 @@ public class Channel {
         return repeated;
     }
 
-    public boolean addSerie(String title, String synopsis, String directorName, int day, int month, int year, String protagonistNames, int state, int programmedEpisodesQuantity, int publishedEpisodesQuantity, String trailer){
+    /**
+     * This method allow us to create a serie. First, it makes sure that the title is not repeated, then it looks for a null
+     * position in the product array, wich is the one where the method executes the constructor with all the necesary data
+     * @param title, title of the serie
+     * @param synopsis, synopsis of the serie, it is an opinion.
+     * @param directorName, name of the director of the serie
+     * @param day, day of the release date
+     * @param month, month of the release date
+     * @param year, year of the release date
+     * @param protagonistNames, the name of the protagonist of the serie separated by commas
+     * @param state, state of the serie. Can be censored or uncesored
+     * @param reasonOfCensored, the reason of why the serie is censored in case it is
+     * @param programmedEpisodesQuantity, the programmed episodes quantity of the first season
+     * @param publishedEpisodesQuantity, the published episodes quantity of the first season
+     * @param trailer, the trailer URL of the first season
+     * @return added, boolean.
+     */
+
+    public boolean addSerie(String title, String synopsis, String directorName, int day, int month, int year, String protagonistNames, int state, String reasonOfCensored, int programmedEpisodesQuantity, int publishedEpisodesQuantity, String trailer){
         boolean added = false;
 
         StateOfSerie serieState = StateOfSerie.NONE;
@@ -369,7 +363,7 @@ public class Channel {
 
             for(int i=0; i<85 && !added; i++){
                 if(productCatalog[i]==null){
-                    productCatalog[i] = new Serie(title, synopsis, directorName, day, month, year, protagonistNames, serieState, programmedEpisodesQuantity, publishedEpisodesQuantity, trailer);
+                    productCatalog[i] = new Serie(title, synopsis, directorName, day, month, year, protagonistNames, serieState, reasonOfCensored, programmedEpisodesQuantity, publishedEpisodesQuantity, trailer);
                     added = true;
                 }
             }
@@ -379,6 +373,21 @@ public class Channel {
         return added;
 
     }
+
+    /**
+     * This method creates a movie, making sure the title is not repeated in any product. Then, executes de constructor in
+     * the first null position it finds.
+     * @param title, title of the movie
+     * @param synopsis, synopsis of the movie
+     * @param directorName, name of the director of the movie
+     * @param day, date of the release date of the movie
+     * @param month, month of the release date of the movie
+     * @param year, year of the release date of the movie
+     * @param productor, name of the productor of the movie
+     * @param minimumAge, the recommended minimum age to watch the movie
+     * @param category, the category of the movie
+     * @return, added, boolean
+     */
 
     public boolean addMovie(String title, String synopsis, String directorName, int day, int month, int year, String productor, int minimumAge, int category){
         boolean added = false;
@@ -415,6 +424,112 @@ public class Channel {
         return added;
     }
 
+    /**
+     * This method executes the toString method of a product with the same title as the one we entered.
+     * @param title, title of the product
+     * @return information, String with the information of the product
+     */
+
+    public String informationOfAProduct(String title){
+        String information="\nThere wasn't a product with that title";
+        boolean found = false;
+        
+        for(int i=0; i<85 && !found; i++){
+            if(productCatalog[i]!=null){
+                if(productCatalog[i].getTitle().equalsIgnoreCase(title)){
+                    information = productCatalog[i].toString();
+                    found = true;
+                }
+            }  
+        }
+        return information;
+    }
+
+    /**
+     * This method add a season in the serie we want using its title
+     * @param title, title of the serie that we are going to add the season
+     * @param programedEpisodesQuantity, the programmed episodes quantity of the season
+     * @param publishedEpisodesQuantity, the published episodes quantity of the season
+     * @param trailer, the trailer URL of the season
+     * @param day, the release day of the season
+     * @param month, the release month of the season
+     * @param year, the release year of the season
+     * @return added, boolean
+     */
+
+    public boolean addSeason(String title, int programedEpisodesQuantity, int publishedEpisodesQuantity, String trailer, int day, int month, int year){
+        boolean added = false;
+
+        for(int i=0; i<85 && !added; i++){
+            if(productCatalog[i]!=null){
+                if(productCatalog[i].getTitle().equalsIgnoreCase(title) && (productCatalog[i] instanceof Serie)){
+                    added = ((Serie) productCatalog[i]).addSeason(programedEpisodesQuantity, publishedEpisodesQuantity, trailer, day, month, year);
+                }
+            }  
+        }
+
+        return added;
+    }
+
+    /**
+     * This method makes a list of movie of a given category.
+     * @param category, it is the category of movies we want to make a list
+     * @return movieList, String
+     */
+
+    public String listMovies(int category){
+        String movieList="---------LIST OF MOVIES----------";
+        int count=1;
+
+        Category movieCategory = Category.NONE;
+
+        switch(category){
+            case 1:
+                movieCategory = Category.ROMANTIC;
+                break;
+            case 2:
+                movieCategory = Category.ACTION;
+                break;
+            case 3:
+                movieCategory = Category.SUSPENSE;
+                break;
+            case 4:
+                movieCategory = Category.HORROR;
+                break;
+            case 5:
+                movieCategory = Category.COMEDY;
+                break;
+        }
+
+        for(int i=0; i<85; i++){
+            if(productCatalog[i]!=null){
+                if(((Movie) productCatalog[i]).getMovieCategory()==movieCategory && (productCatalog[i] instanceof Movie)){
+                    movieList += "\n"+count+". "+productCatalog[i].getTitle();
+                    count++;
+                }
+            }  
+        }
+
+        return movieList;
+    }
+
+    /**
+     * It makes a list of series with their last season
+     * @return list, String
+     */
+
+    public String listSeries(){
+        String list = "";
+        int count = 1;
+        for(int i=0; i<85; i++){
+            if(productCatalog[i]!=null){
+                if(productCatalog[i] instanceof Serie){
+                    list += "-------------------------------Serie number "+count+"------------------------\n"+((Serie) productCatalog[i]).serieWithLastSeason();
+                }
+            }
+        }
+        return list;
+    }
 
 
 }

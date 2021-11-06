@@ -6,6 +6,16 @@ public abstract class Product {
     protected String directorName;
     protected Date releaseDate;
 
+    /**
+     * Constructor of class product
+     * @param title, title of the product
+     * @param synopsis, synopsis of the product
+     * @param directorName, the name of the director of the product
+     * @param day, release day of the product
+     * @param month, release month of the product
+     * @param year, release year of the product
+     */
+
     public Product(String title, String synopsis, String directorName, int day, int month, int year){
         this.title = title;
         this.synopsis = synopsis;
@@ -45,6 +55,11 @@ public abstract class Product {
         this.releaseDate = releaseDate;
     }
 
+    /**
+     * This is an abstract method that indicates that the subclasses of product must have a toString method
+     */
+
     public abstract String toString();
+
 
 }
