@@ -1,26 +1,16 @@
 package model;
 
 public class Season {
-    private int number;
     private int programedEpisodesQuantity;
     private int publishedEpisondesQuantity;
     private String trailer;
     private Date releaseDateOfSeason;
 
-    public Season(int number, int programedEpisodesQuantity, int publishedEpisondesQuantity, String trailer, int day, int month, int year){
-        this.number = number;
+    public Season(int programedEpisodesQuantity, int publishedEpisondesQuantity, String trailer, int day, int month, int year){       
         this.programedEpisodesQuantity = programedEpisodesQuantity;
         this.publishedEpisondesQuantity = publishedEpisondesQuantity;
         this.trailer = trailer;
         releaseDateOfSeason = new Date(day, month, year);
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public int getProgramedEpisodesQuantity() {

@@ -45,4 +45,6 @@ public abstract class Product {
         this.releaseDate = releaseDate;
     }
 
+    public abstract String toString();
+
 }

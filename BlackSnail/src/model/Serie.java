@@ -3,13 +3,14 @@ package model;
 public class Serie extends Product {
     private String protagonistNames;
     private StateOfSerie serieState;
-    private Season serieSeason;
+    private Season serieSeasons[];
 
     public Serie(String title, String synopsis, String directorName, int day, int month, int year, String protagonistNames, StateOfSerie serieState, int programmedEpisodesQuantity, int publishedEpisodesQuantity, String trailer){
         super(title, synopsis, directorName, day, month, year);
         this.protagonistNames = protagonistNames;
         this.serieState = serieState;
-        serieSeason = new Season(1, programmedEpisodesQuantity, publishedEpisodesQuantity, trailer, day, month, year);
+        serieSeasons = new Season[50];
+        serieSeasons[0] = new Season(programmedEpisodesQuantity, publishedEpisodesQuantity, trailer, day, month, year);
     }
 
 
@@ -29,12 +30,21 @@ public class Serie extends Product {
         this.serieState = serieState;
     }
 
-    public Season getSerieSeason() {
-        return serieSeason;
-    }
+    @Override
 
-    public void setSerieSeason(Season serieSeason) {
-        this.serieSeason = serieSeason;
+    public String toString(){
+
+        String generalData = "\n------------General Data-------------\n"+
+                             "\nTitle: "+getTitle()+
+                             "\nSynopsis: "+getSynopsis()+
+                             "\nDirector name: "+getDirectorName()+
+                             "\nDate: "+getReleaseDate().toString();
+
+        String serieData = "\n---------------Serie Data---------------\n"+
+                           "\nProtagonist names: "+protagonistNames+
+                           "\nState of the serie: "+serieState;
+
+        return generalData + serieData;
     }
 
 }
