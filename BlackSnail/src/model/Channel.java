@@ -3,6 +3,7 @@ package model;
 public class Channel {
 	
 	private final int MAX_PRODUCTS = 85;
+    private final int MAX_SUBSCRIBERS = 50;
 	
     private String nit;
     private String address;
@@ -24,8 +25,8 @@ public class Channel {
         this.address = address;
         this.webPage = webPage;
 
-        subscriberList = new Subscriber[50];
-		productCatalog = new Product[85];
+        subscriberList = new Subscriber[MAX_SUBSCRIBERS];
+		productCatalog = new Product[MAX_PRODUCTS];
     }
 
 
