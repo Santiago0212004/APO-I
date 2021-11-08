@@ -380,7 +380,7 @@ public class ChannelSystem {
                 sc.nextLine();   
 
                 while(publishedEpisodesQuantity<1 || publishedEpisodesQuantity>programmedEpisodesQuantity){
-                    System.out.println("\nThe quantity of programmed episodes can't be less than 1 or higher than the programmed quantity. Write a valid number: ");
+                    System.out.println("\nThe quantity of published episodes can't be less than 1 or higher than the programmed quantity. Write a valid number: ");
                     publishedEpisodesQuantity = sc.nextInt();
                     sc.nextLine();
                 }
@@ -501,7 +501,7 @@ public class ChannelSystem {
         sc.nextLine();
 
         while(publishedEpisodesQuantity<1 || publishedEpisodesQuantity>programmedEpisodesQuantity){
-            System.out.println("\nThe quantity of programmed episodes can't be less than 1 or higher than the programmed quantity. Write a valid number: ");
+            System.out.println("\nThe quantity of published episodes can't be less than 1 or higher than the programmed quantity. Write a valid number: ");
             publishedEpisodesQuantity = sc.nextInt();
             sc.nextLine();
         }
