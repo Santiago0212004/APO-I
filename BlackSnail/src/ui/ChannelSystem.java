@@ -370,7 +370,7 @@ public class ChannelSystem {
                 sc.nextLine();
 
                 while(programmedEpisodesQuantity<1){
-                    System.out.println("\nThe quantity of programmed episodes can't be less than 1. Write a valid number: ");
+                    System.out.println("\nThe quantity of programmed episodes can't be less than 1. Write a valid quantity: ");
                     programmedEpisodesQuantity = sc.nextInt();
                     sc.nextLine();
                 }

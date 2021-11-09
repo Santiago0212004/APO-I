@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"model","c":"StateOfSerie","l":"CENSORED"},{"p":"model","c":"StateOfSerie","l":"NONE"},{"p":"model","c":"StateOfSerie","l":"UNCENSORED"},{"p":"model","c":"StateOfSerie","l":"valueOf(String)","url":"valueOf(java.lang.String)"},{"p":"model","c":"StateOfSerie","l":"values()"}]
