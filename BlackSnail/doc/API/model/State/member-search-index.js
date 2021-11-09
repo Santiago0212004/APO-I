@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"model","c":"State","l":"ACTIVE"},{"p":"model","c":"State","l":"INACTIVE"},{"p":"model","c":"State","l":"valueOf(String)","url":"valueOf(java.lang.String)"},{"p":"model","c":"State","l":"values()"}]
