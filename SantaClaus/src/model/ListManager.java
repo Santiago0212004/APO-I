@@ -56,7 +56,7 @@ public class ListManager {
 
         if(list==1){
             for(int i=0; i<goodChilds.size() && !changed; i++){
-                if(goodChilds.get(i).getCompleteName().equals(completeName)){
+                if(goodChilds.get(i).getCompleteName().equalsIgnoreCase(completeName)){
                     addChild(goodChilds.get(i).getCompleteName(), goodChilds.get(i).getChristmasWish(), goodChilds.get(i).getCompleteAddress(), goodChilds.get(i).getAge(), 2);
                     goodChilds.remove(i);
                     changed = true;
@@ -66,7 +66,7 @@ public class ListManager {
 
         if(list==2){
             for(int i=0; i<badChilds.size() && !changed; i++){
-                if(badChilds.get(i).getCompleteName().equals(completeName)){
+                if(badChilds.get(i).getCompleteName().equalsIgnoreCase(completeName)){
                     addChild(badChilds.get(i).getCompleteName(), badChilds.get(i).getChristmasWish(), badChilds.get(i).getCompleteAddress(), badChilds.get(i).getAge(), 1);
                     badChilds.remove(i);
                     changed = true;
