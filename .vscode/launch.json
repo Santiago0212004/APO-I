@@ -15,14 +15,14 @@
             "name": "Launch Aumento",
             "request": "launch",
             "mainClass": "Aumento",
-            "projectName": "ProyectosAPO_237d2449"
+            "projectName": "ProyectosAPO 237d2449"
         },
         {
             "type": "java",
             "name": "Launch ChannelSystem",
             "request": "launch",
             "mainClass": "ChannelSystem",
-            "projectName": "ProyectosAPO_237d2449"
+            "projectName": "ProyectosAPO 237d2449"
         }
     ]
 }

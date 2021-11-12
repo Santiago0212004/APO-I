@@ -6,6 +6,15 @@ public class Child implements Comparable<Child>{
     private String completeAddress;
     private int age;
     private Behavior childBehavior;
+    
+    /**
+     * Constructor of child
+     * @param completeName, complete name of the child
+     * @param christmasWish, the wish that the child wants for christmas
+     * @param completeAddress, the complete address of the child
+     * @param age, age of the child
+     * @param childBehavior, behavior of the child
+     */
 
     public Child(String completeName, String christmasWish, String completeAddress, int age, Behavior childBehavior){
         this.completeName = completeName;
@@ -55,6 +64,10 @@ public class Child implements Comparable<Child>{
         this.childBehavior = childBehavior;
     }
 
+    /**
+     * To string
+     */
+
     public String toString(){
         return "\nComplete name: "+completeName+
                "\nChristmas wish: "+christmasWish+
@@ -63,6 +76,11 @@ public class Child implements Comparable<Child>{
     }
 
     @Override
+
+    /**
+     * Compares the age of the object with a new one
+     * 
+     */
 
     public int compareTo(Child otherChild){
         return this.age - otherChild.age;

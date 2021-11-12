@@ -3,8 +3,29 @@ package model;
 import java.util.ArrayList;
 
 public class ListManager {
-    ArrayList<Child> goodChilds = new ArrayList<Child>();
-    ArrayList<Child> badChilds = new ArrayList<Child>();
+    
+
+    private ArrayList<Child> goodChilds;
+    private ArrayList<Child> badChilds;
+
+    /**
+     * Initializes both lists
+     */
+
+    public ListManager(){
+        goodChilds = new ArrayList<Child>();
+        badChilds = new ArrayList<Child>();
+    }
+
+    /**
+     * Add a child
+     * @param completeName, complete name of the child
+     * @param christmasWish, the wish that the child wants for christmas
+     * @param completeAddress, the complete address of the child
+     * @param age, age of the child
+     * @param behavior, number with the behavior of the child
+     * @return added, true if added was sucessfully
+     */
 
     public boolean addChild(String completeName, String christmasWish, String completeAddress, int age, int behavior){
         boolean added = false;
@@ -51,6 +72,13 @@ public class ListManager {
         return added;
     }
 
+    /**
+     * Change a child of list
+     * @param completeName, complete name of the child
+     * @param list, the list of children that the child already is
+     * @return changed, true if changing was sucessfully
+     */
+
     public boolean changeChild(String completeName, int list){
         boolean changed = false;
 
@@ -76,6 +104,12 @@ public class ListManager {
 
         return changed;
     }
+    
+    /**
+     * Show the list the user wants to see
+     * @param listToSee, number of the list
+     * @return String, all data of the children in the selected list
+     */
 
     public String showList(int listToSee){
         String list="";

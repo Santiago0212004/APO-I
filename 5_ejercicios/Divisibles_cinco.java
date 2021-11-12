@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-public class Divisibles_cinco{
+public class Divisibles cinco{
 
-    public static double Comprobar_divisores(int m, int n){
+    public static double Comprobar divisores(int m, int n){
         int mayor, menor, suma=0;
 
         if(m>=n){
