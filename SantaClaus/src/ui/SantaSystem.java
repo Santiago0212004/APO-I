@@ -15,19 +15,19 @@ public class SantaSystem {
 
     public static void main(String[] args) {
 
-		SantaSystem giftsSystem = new SantaSystem();
+		SantaSystem dataSystem = new SantaSystem();
 		
 	
 		System.out.println("Initializing Santa's system. Ho ho ho");
 
-        giftsSystem.initializeListManager();
+        dataSystem.initializeListManager();
 		
 		int option=0;
 		
 		do{
 			
-			option= giftsSystem.showMenu();
-			giftsSystem.executeOperation(option);
+			option= dataSystem.showMenu();
+			dataSystem.executeOperation(option);
 			
 		}while (option!=0);
 		
