@@ -124,14 +124,15 @@ public class ChannelSystem {
         String idNumber, name;
         int age, type;
         double hoursWillingToWatch;
+
         if(blackSnail.avaliableSpaceForSubscribers()){
 
             System.out.println("\nWrite the id number: ");
-            idNumber = sc.next();
+            idNumber = sc.nextLine();
 
             while(idNumber.equals("")){
                 System.out.println("Can't enter an empty id. Write a valid one: ");
-                type = sc.nextInt();
+                idNumber = sc.nextLine();
             }
             
             System.out.println("\nWrite the name: ");
@@ -139,14 +140,28 @@ public class ChannelSystem {
 
             while(name.equals("")){
                 System.out.println("Can't enter an empty name. Write a valid one: ");
-                type = sc.nextInt();
+                name = sc.nextLine();
             }
 
             System.out.println("\nEnter the age: ");
             age = sc.nextInt();
+            sc.nextLine();
+
+            while(age<0){
+                System.out.println("\nWrite a valid age. ");
+                age = sc.nextInt();
+                sc.nextLine();
+            }
 
             System.out.println("\nWrite the hours willing to watch: ");
             hoursWillingToWatch = sc.nextDouble();
+            sc.nextLine();
+
+            while(hoursWillingToWatch<0){
+                System.out.println("\nWrite a valid number of hours. ");
+                hoursWillingToWatch = sc.nextDouble();
+                sc.nextLine();
+            }
 
             System.out.println("\nWrite the type of client \n"+
                                "(1) NORMAL \n"+
@@ -156,10 +171,12 @@ public class ChannelSystem {
                             );
             
             type = sc.nextInt();
+            sc.nextLine();
             
             while(type!=1 && type!=2 && type!=3 && type!=4){
                 System.out.println("Enter a valid option");
                 type = sc.nextInt();
+                sc.nextLine();
             }
 
             boolean added = blackSnail.addSubscriber(idNumber, name, age, hoursWillingToWatch, type);
