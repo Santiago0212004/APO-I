@@ -8,8 +8,6 @@ public class Server {
     private double disksCapacity;
     private double ramMemory;
 
-    
-
     private Processor serverProccesor;
 
     public Server(int amountOfProcessors, int amountOfDisks, double cacheMemory, double disksCapacity, double ramMemory, Processor serverProccesor){

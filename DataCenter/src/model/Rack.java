@@ -1,11 +1,14 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Rack {
     private int amountOfHostedServers;
 
-    ArrayList<Server> servers = new ArrayList<Server>();
+    private Server[] servers; 
+
+    public Rack(int amountOfHostedServers){
+        this.amountOfHostedServers = amountOfHostedServers;
+        servers = new Server[amountOfHostedServers];
+    }
 
     public int getAmountOfHostedServers() {
         return amountOfHostedServers;

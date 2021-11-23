@@ -1,5 +1,6 @@
 package model;
 
+
 public class MiniRoom {
     private int id;
     private Company hostCompany;
@@ -7,10 +8,16 @@ public class MiniRoom {
     private Rack rack;
     private boolean miniRoomOn;
     private boolean miniRoomRented;
-    private Date rentalDate;
+    private Date rentDate;
 
-    public MiniRoom(){
-
+    public MiniRoom(int id, String hostCompanyName, String hostCompanyNit, double rentalPrice, int amountOfHostedServers, int day, int month, int year){
+        this.id = id;
+        hostCompany = new Company(hostCompanyName, hostCompanyNit);
+        this.rentalPrice = rentalPrice;
+        rack = new Rack(amountOfHostedServers);
+        miniRoomOn = true;
+        miniRoomRented = true;
+        rentDate = new Date(day,month,year);
     }
 
     public int getId() {

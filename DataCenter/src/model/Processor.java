@@ -1,5 +1,5 @@
 package model;
 
 public enum Processor {
-    INTEl, AMD;
+    INTEL, AMD;
 }
