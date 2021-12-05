@@ -1,54 +1,44 @@
 package model;
 
 public class Server {
-    private int amountOfProcessors;
-    private int amountOfDisks;
-
     private double cacheMemory;
-    private double disksCapacity;
+    private int processorsAmount;
+    private Trademark processorsTrademark;
     private double ramMemory;
+    private int disksAmount;
+    private double disksCapacity;
 
-    private Processor serverProccesor;
-
-    public Server(int amountOfProcessors, int amountOfDisks, double cacheMemory, double disksCapacity, double ramMemory, Processor serverProccesor){
-        this.amountOfProcessors = amountOfProcessors;
-        this.amountOfDisks = amountOfDisks;
+    public Server(double cacheMemory, int processorsAmount, Trademark processorsTrademark, double ramMemory, int disksAmount, double disksCapacity){
         this.cacheMemory = cacheMemory;
-        this.disksCapacity = disksCapacity;
+        this.processorsAmount = processorsAmount;
+        this.processorsTrademark = processorsTrademark;
         this.ramMemory = ramMemory;
-        this.serverProccesor = serverProccesor;
-    }
-
-    public int getAmountOfProcessors() {
-        return amountOfProcessors;
-    }
-
-    public void setAmountOfProcessors(int amountOfProcessors) {
-        this.amountOfProcessors = amountOfProcessors;
-    }
-
-    public int getAmountOfDisks() {
-        return amountOfDisks;
-    }
-
-    public void setAmountOfDisks(int amountOfDisks) {
-        this.amountOfDisks = amountOfDisks;
-    }
-
-    public double getChacheMemory() {
-        return chacheMemory;
-    }
-
-    public void setChacheMemory(double chacheMemory) {
-        this.chacheMemory = chacheMemory;
-    }
-
-    public double getDisksCapacity() {
-        return disksCapacity;
-    }
-
-    public void setDisksCapacity(double disksCapacity) {
+        this.disksAmount = disksAmount;
         this.disksCapacity = disksCapacity;
+    }
+
+    public double getCacheMemory() {
+        return cacheMemory;
+    }
+
+    public void setCacheMemory(double cacheMemory) {
+        this.cacheMemory = cacheMemory;
+    }
+
+    public int getProcessorsAmount() {
+        return processorsAmount;
+    }
+
+    public void setProcessorsAmount(int processorsAmount) {
+        this.processorsAmount = processorsAmount;
+    }
+
+    public Trademark getProcessorsTrademark() {
+        return processorsTrademark;
+    }
+
+    public void setProcessorsTrademark(Trademark processorsTrademark) {
+        this.processorsTrademark = processorsTrademark;
     }
 
     public double getRamMemory() {
@@ -59,12 +49,20 @@ public class Server {
         this.ramMemory = ramMemory;
     }
 
-    public Processor getServerProccesor() {
-        return serverProccesor;
+    public int getDisksAmount() {
+        return disksAmount;
     }
 
-    public void setServerProccesor(Processor serverProccesor) {
-        this.serverProccesor = serverProccesor;
+    public void setDisksAmount(int disksAmount) {
+        this.disksAmount = disksAmount;
+    }
+
+    public double getDisksCapacity() {
+        return disksCapacity;
+    }
+
+    public void setDisksCapacity(double disksCapacity) {
+        this.disksCapacity = disksCapacity;
     }
 
 }
