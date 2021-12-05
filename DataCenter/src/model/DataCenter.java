@@ -24,6 +24,10 @@ public class DataCenter {
         return miniRooms;
     }
 
+    public ArrayList<Company> getRentingCompanies(){
+        return rentingCompanies;
+    }
+
     public String showAvailableMiniRooms(){
 
         String availables="\n-----------------------Available mini rooms-----------------------\n";
@@ -161,6 +165,63 @@ public class DataCenter {
             asigned = false;
         }
         
+
+        return asigned;
+    }
+
+    public String showRentingCompanies(){
+        String companies="----------------List of Hosts----------------------------------";
+
+        for(int i=0; i<rentingCompanies.size(); i++){
+            if(rentingCompanies.get(i) instanceof IcesiProject){
+                companies += "\n"+(i+1)+". Icesi investigation project "+((IcesiProject) rentingCompanies.get(i)).getProjectId();
+            }
+            else{
+                companies += "\n"+(i+1)+". "+rentingCompanies.get(i).getName();
+            }
+        }
+
+        companies+="\n----------------------------------------------------------------";
+
+        return companies;
+    }
+
+    public boolean asignToExistingCompany(int companyOption, int roomId, int serversAmount, int day, int month, int year, double cacheMemory, int processorsAmount, int processorsTrademark, double ramMemory, int disksAmount, double disksCapacity){
+        boolean asigned = false;
+        companyOption = companyOption - 1;
+
+        if(rentingCompanies.get(companyOption) instanceof IcesiProject){
+
+            String projectId = ((IcesiProject) rentingCompanies.get(companyOption)).getProjectId();
+
+            for(int i=0; i<8 && !asigned; i++){
+                for(int j=0; j<50 && !asigned; j++){
+                    if(miniRooms[i][j].getRoomId()==roomId){
+                        miniRooms[i][j].asignProject(projectId, serversAmount, day, month, year, cacheMemory, processorsAmount, processorsTrademark, ramMemory, disksAmount, disksCapacity);
+                        miniRooms[i][j].setAvailable(false);
+                        asigned = true;
+                    }
+                }
+            }
+
+        }
+
+        else{
+
+            String companyName = rentingCompanies.get(companyOption).getName();
+            String companyNit = rentingCompanies.get(companyOption).getNit();
+
+            for(int i=0; i<8 && !asigned; i++){
+                for(int j=0; j<50 && !asigned; j++){
+                    if(miniRooms[i][j].getRoomId()==roomId){
+                        miniRooms[i][j].asignCompany(companyName, companyNit, serversAmount, day, month, year, cacheMemory, processorsAmount, processorsTrademark, ramMemory, disksAmount, disksCapacity);
+                        miniRooms[i][j].setAvailable(false);
+                        asigned = true;
+                    }
+                }
+            }
+
+        }
 
         return asigned;
     }
