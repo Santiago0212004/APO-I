@@ -429,7 +429,7 @@ public class DataCenter {
      * Calculates the amount of renting servers that a company has (if it is zero, the company dissapears of the list)
      * @param companyNumber, the company that the user chose
      * @param type, 0 if company, 1 if Icesi project
-     * @return
+     * @return, amount of rents
      */
 
     public int amountOfRents(int companyNumber, int type){
@@ -563,7 +563,8 @@ public class DataCenter {
     }
 
     /**
-     * Executes the M simulation
+     * Executes M simulation
+     * @param n, column that user chose
      */
 
     public void simulationM(int n){
@@ -577,7 +578,8 @@ public class DataCenter {
     }
 
     /**
-     * Executes the P simulation
+     * Executes P simulation
+     * @param m, corridor user chose
      */
 
     public void simulationP(int m){

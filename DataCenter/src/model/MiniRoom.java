@@ -89,14 +89,6 @@ public class MiniRoom {
         this.roomId = roomId;
     }
 
-    public Rack getRack() {
-        return rack;
-    }
-
-    public void setRack(Rack rack) {
-        this.rack = rack;
-    }
-
     public boolean isAvailable() {
         return available;
     }
@@ -144,7 +136,7 @@ public class MiniRoom {
 
     /**
      * Obtains the id of the host if it is an ICESI project
-     * @return
+     * @return id
      */
 
     public String getIdOfIcesiProject(){
