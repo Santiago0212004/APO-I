@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch DataCenterSystem",
+            "request": "launch",
+            "mainClass": "DataCenterSystem",
+            "projectName": "APO-I_55d007a7"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

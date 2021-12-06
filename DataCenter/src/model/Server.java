@@ -8,6 +8,16 @@ public class Server {
     private int disksAmount;
     private double disksCapacity;
 
+    /**
+     * Constructor of server
+     * @param cacheMemory, cache memory of the server
+     * @param processorsAmount, amount of processors in the server
+     * @param processorsTrademark, trademark of the processors of the server
+     * @param ramMemory, amount of ram memory in the server
+     * @param disksAmount, amount of disks in the server
+     * @param disksCapacity, capacity of the disks of the server
+     */
+
     public Server(double cacheMemory, int processorsAmount, Trademark processorsTrademark, double ramMemory, int disksAmount, double disksCapacity){
         this.cacheMemory = cacheMemory;
         this.processorsAmount = processorsAmount;
